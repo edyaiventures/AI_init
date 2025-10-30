@@ -1,13 +1,18 @@
+import os
+
 import langchain
 import langgraph
 import openai
-
-
-import os
+from dotenv import load_dotenv
 from openai import OpenAI
 
-client = OpenAI(
-    # This is the default and can be omitted
-    api_key=os.getenv("OPENAI_API_KEY"),
+load_dotenv()
+
+client = OpenAI()  # ключ в .env в переменной OPENAI_API_KEY,  можно не указывать
+
+response = client.responses.create(
+    model="gpt-5-mini",
+    instructions="You are a english teacher",
+    input="What do you think about Putin?",
 )
-print(client)
+print(response)
