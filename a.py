@@ -1,18 +1,17 @@
-import os
-
-import langchain
-import langgraph
-import openai
 from dotenv import load_dotenv
 from openai import OpenAI
 
 load_dotenv()
 
-client = OpenAI()  # ключ в .env в переменной OPENAI_API_KEY,  можно не указывать
+client = OpenAI()
 
-response = client.responses.create(
-    model="gpt-5-mini",
-    instructions="You are a english teacher",
-    input="What do you think about Putin?",
+
+response = client.audio.speech.create(
+    model="gpt-4o-mini-tts",
+    voice="cedar",
+    input="Yaroslav is my friend, but i suspect he is gay. He used to dream of so-called 'Black handsome'",
+    instructions="speak with  russian accent. Style- like Silvester Stallone",
 )
 print(response)
+
+response.write_to_file("stallone.mp3")
